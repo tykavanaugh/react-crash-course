@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask';
 import { useState } from 'react'
 
 
@@ -19,6 +20,7 @@ function App() {
     "day": "Feb 6th at 1:30pm",
     "reminder": true
   }])
+  const [showAddTask,setShowAddTask] = useState(false) 
   const title = "Task Tracker Thing"
 
 
@@ -32,9 +34,19 @@ function App() {
     console.log(id)
   };
 
+  const addTask = (task) => {
+    const id = Math.floor(Math.random() * 100000) + 1;
+    const newTask = {id,...task};
+    console.log(id)
+    console.log(...tasks)
+    setTasks([...tasks,newTask]);
+
+  };
+
   return (
     <div className="container">
-      <Header title={title}/>
+      <Header title={title} showAddTask={showAddTask} onAdd={()=>setShowAddTask(!showAddTask)}/>
+      {showAddTask?<AddTask addTask = {addTask}/>:""}
       {tasks.length > 0 ? <Tasks tasks={tasks} deleteTask={deleteTask} toggleReminder={toggleReminder}/> : <h3>No tasks left</h3>}
     </div>
   );
