@@ -9,7 +9,7 @@ const Tasks = (props) => {
   return (
     <>
       {props.tasks.map((task) => (
-      <Task task={task} deleteTask={props.deleteTask} toggleReminder={props.toggleReminder}/>
+      <Task task={task} key={task.id} deleteTask={props.deleteTask} toggleReminder={props.toggleReminder}/>
       ))}
     </>
   )
